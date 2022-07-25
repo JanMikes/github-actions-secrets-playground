@@ -1,3 +1,8 @@
 my_value_1: __MY_SECRET_VALUE_1__
 my_value_2: __MY_SECRET_VALUE_2__
 my_value_3: __NON_EXISTING_PLACEHOLDER__
+
+subcategory:
+    # Let's try repeateating the same value + indent + quotes
+    my_value_1: "__MY_SECRET_VALUE_1__"
+    my_value_2: '__MY_SECRET_VALUE_2__'
