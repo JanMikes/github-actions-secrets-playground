@@ -1,2 +1,4 @@
 my_value_1: __MY_SECRET_VALUE_1__
+my_value_4: __"MY_SECRET_VALUE_1"__
 my_value_2: __MY_SECRET_VALUE_2__
+my_value_3: "MY_SECRET_VALUE_1"

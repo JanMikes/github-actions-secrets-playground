@@ -10,6 +10,17 @@ jobs:
             -   name: Checkout
                 uses: actions/checkout@v2
 
-            -   run: echo "$SECRETS"
+            # Make copy of a template file, where we will process the secrets
+            -   run: cp file-template.yml file-processed.yml
+
+            # Before: check it is a template with placeholders
+            -   run: cat file-processed.yml
+
+            # Iterate over secrets as JSON and replace possible placeholders
+            # Save output to the file to be processed
+            -   run: echo $SECRETS | jq --raw-output 'keys[]' | while read -r secretKey; do; cat file-processed.yml | sed "s/__${secretKey}__/$(echo $SECRETS | jq --raw-output .${secretKey})/" > file-processed.yml ; done
                 env:
                     SECRETS: ${{ toJson(secrets) }}
+
+            # After: check, the file was processed successfully and placeholders are replaced with secrets
+            -   run: cat file-processed.yml
