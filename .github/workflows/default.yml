@@ -19,7 +19,7 @@ jobs:
             # Iterate over secrets as JSON and replace possible placeholders
             # Save output to the file to be processed
             -   run: |
-                    echo $SECRETS | jq --raw-output 'keys[]' | while read -r secretKey; do cat file-processed.yml | sed "s#__${secretKey}__#$(echo $SECRETS | jq --raw-output .${secretKey})#" > file-processed.yml; done
+                    echo $SECRETS | jq --raw-output 'keys[]' | while read -r secretKey; do cat file-processed.yml | sed "s#__${secretKey}__#$(echo $SECRETS | jq --raw-output .${secretKey} | tr -d '\n\t')#" > file-processed.yml; done
                 env:
                     SECRETS: ${{ toJson(secrets) }}
 
